@@ -1,0 +1,15 @@
+name: Go Lint
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Golangci-lint
+      uses: golangci/golangci-lint-action@v6.1.1
