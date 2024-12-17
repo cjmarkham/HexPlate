@@ -9,3 +9,9 @@ services:
       - '8000:8000'
     environment:
       MONGO_DSN: "mongodb://mongo:27017"
+    develop:
+      watch:
+        - action: rebuild
+          path: ./internal
+        - action: rebuild
+          path: ./cmd
