@@ -16,7 +16,7 @@ func TestHandlers_CreateForum(t *testing.T) {
 		mockCreate       testdata.MockParameters
 		request          api.CreatePetRequestObject
 		expectedError    error
-		expectedResponse api.CreatePet201JSONResponse
+		expectedResponse *api.CreatePet201JSONResponse
 	}{
 		"it succeeds": {
 			request: api.CreatePetRequestObject{
@@ -30,12 +30,15 @@ func TestHandlers_CreateForum(t *testing.T) {
 			},
 			mockCreate: testdata.MockParameters{
 				Response: &pet.Pet{
+					ID:   uuid.MustParse("8ad1ab90-3371-4085-b1ea-0b1c1a39f52a"),
 					Name: "Test Pet",
 				},
+				Times: 1,
 			},
-			expectedResponse: api.CreatePet201JSONResponse{
+			expectedResponse: &api.CreatePet201JSONResponse{
 				Data: api.PetResponse{
-					Id: uuid.MustParse("8ad1ab90-3371-4085-b1ea-0b1c1a39f52a"),
+					Id:   uuid.MustParse("8ad1ab90-3371-4085-b1ea-0b1c1a39f52a"),
+					Type: api.PetResponseTypePet,
 					Attributes: api.PetResponseAttributes{
 						Name: "Test Pet",
 					},
