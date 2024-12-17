@@ -12,6 +12,7 @@ package helpers
 import (
 	reflect "reflect"
 
+	uuid "github.com/google/uuid"
 	gomock "go.uber.org/mock/gomock"
 )
 
@@ -40,10 +41,10 @@ func (m *MockUUIDGenerator) EXPECT() *MockUUIDGeneratorMockRecorder {
 }
 
 // NewUUID mocks base method.
-func (m *MockUUIDGenerator) NewUUID() string {
+func (m *MockUUIDGenerator) NewUUID() uuid.UUID {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "NewUUID")
-	ret0, _ := ret[0].(string)
+	ret0, _ := ret[0].(uuid.UUID)
 	return ret0
 }
 

@@ -2,7 +2,9 @@ package pet
 
 import (
 	"context"
+	"github.com/cjmarkham/hexplate/internal/helpers"
 	"github.com/cjmarkham/hexplate/internal/testdata"
+	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/mock/gomock"
 	"testing"
@@ -52,7 +54,14 @@ func TestService_Create(t *testing.T) {
 				Return(test.expectedCreate.Response, test.expectedCreate.Error).
 				Times(test.expectedCreate.Times)
 
-			svc := ProvideService(mockRepository)
+			uuidGen := helpers.NewMockUUIDGenerator(ctrl)
+
+			uuidGen.EXPECT().
+				NewUUID().
+				Return(uuid.MustParse("e206bc40-4d7c-4b72-8278-d585f9883f2e")).
+				AnyTimes()
+
+			svc := ProvideService(mockRepository, uuidGen)
 			result, err := svc.Create(context.Background(), test.dto)
 
 			assert.Equal(t, test.expectedResult, result)

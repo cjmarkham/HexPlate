@@ -32,7 +32,7 @@ HexPlate is a boilerplate template for Golang.
   * `repository` - *repository logic*
     * `[repository]` - *the repository used, Eg: `mongo`*
       * `[resource]` - *repository methods for the resource*
-        * `repository.go` - *the Wire provider for dependency injection. Provides the repository and collection*
+        * `provider.go` - *the Wire provider for dependency injection. Provides the repository and collection*
     * `operations.go` - *the interface repository operations must adhere to*
     * `provider.go` - *the Wire provider for dependency injection. Provides the operations*
 

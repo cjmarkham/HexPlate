@@ -23,8 +23,8 @@ func injectApp() pet.Handlers {
 	collection := pet2.ProvideCollection(database)
 	operations := mongo.ProvideOperations(collection)
 	repository := pet2.ProvideRepository(collection, operations)
-	defaultUUIDGenerator := helpers.ProvideUUIDGenerator()
-	service := pet3.ProvideService(repository, defaultUUIDGenerator)
+	uuidGenerator := helpers.ProvideUUIDGenerator()
+	service := pet3.ProvideService(repository, uuidGenerator)
 	handlers := pet.ProvideHandlers(service)
 	return handlers
 }

@@ -5,16 +5,16 @@ package helpers
 import "github.com/google/uuid"
 
 type UUIDGenerator interface {
-	NewUUID() string
+	NewUUID() uuid.UUID
 }
 
-type DefaultUUIDGenerator struct{}
+type Generator struct{}
 
-func (d *DefaultUUIDGenerator) NewUUID() *uuid.UUID {
+func (d Generator) NewUUID() uuid.UUID {
 	u := uuid.New()
-	return &u
+	return u
 }
 
-func ProvideUUIDGenerator() DefaultUUIDGenerator {
-	return DefaultUUIDGenerator{}
+func ProvideUUIDGenerator() UUIDGenerator {
+	return Generator{}
 }
