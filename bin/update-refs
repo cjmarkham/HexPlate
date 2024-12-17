@@ -1,0 +1,14 @@
+#!/bin/sh
+
+if [ $# -ne 1 ]; then
+    echo "Usage: $0 <replacement>"
+    exit 1
+fi
+
+replacement=$1
+
+find . -type f -name "*.go" -exec perl -pi -e "s|\bcjmarkham/hexplate\b|${replacement}|g" {} +
+find . -type f -name "go.mod" -exec perl -pi -e "s|\bcjmarkham/hexplate\b|${replacement}|g" {} +
+find . -type f -name "Dockerfile" -exec perl -pi -e "s|\bcjmarkham/hexplate\b|${replacement}|g" {} +
+
+echo "replaced references with ${replacement}"
