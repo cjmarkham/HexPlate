@@ -6,6 +6,7 @@ package main
 import (
 	petApi "github.com/cjmarkham/hexplate/internal/api/pet"
 	petService "github.com/cjmarkham/hexplate/internal/domain/pet"
+	"github.com/cjmarkham/hexplate/internal/helpers"
 	"github.com/cjmarkham/hexplate/internal/repository"
 	"github.com/cjmarkham/hexplate/internal/repository/mongo"
 	"github.com/cjmarkham/hexplate/internal/repository/mongo/pet"
@@ -17,6 +18,7 @@ var apiHandlers = wire.NewSet(
 )
 
 var domainHandlers = wire.NewSet(
+	helpers.ProvideUUIDGenerator,
 	petService.ProvideService,
 )
 

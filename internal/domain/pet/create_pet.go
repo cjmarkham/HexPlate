@@ -7,5 +7,7 @@ func (s service) Create(ctx context.Context, dto DTO) (*Pet, error) {
 		return nil, ErrNameMinLength
 	}
 
+	dto.ID = s.uuidGenerator.NewUUID()
+
 	return s.repository.Create(ctx, dto.ToPet())
 }

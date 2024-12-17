@@ -8,11 +8,18 @@ type Pet struct {
 }
 
 type DTO struct {
+	ID   *uuid.UUID
 	Name string
 }
 
 func (d DTO) ToPet() Pet {
-	return Pet{
+	p := Pet{
 		Name: d.Name,
 	}
+
+	if d.ID != nil {
+		p.ID = *d.ID
+	}
+
+	return p
 }
