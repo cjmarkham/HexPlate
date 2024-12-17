@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/cjmarkham/hexplate/cmd/api"
 	api2 "github.com/cjmarkham/hexplate/internal/api"
-	"github.com/cjmarkham/hexplate/internal/api/forum"
+	"github.com/cjmarkham/hexplate/internal/api/pet"
 	"github.com/go-chi/chi/v5"
 	middleware "github.com/oapi-codegen/nethttp-middleware"
 	"log"
@@ -18,7 +18,7 @@ func main() {
 	start(handlers)
 }
 
-func start(handlers forum.Handlers) {
+func start(handlers pet.Handlers) {
 	swagger, err := api.GetSwagger()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error loading swagger spec\n: %s", err)
@@ -32,11 +32,8 @@ func start(handlers forum.Handlers) {
 		ErrorHandler: api2.HandleValidationError,
 	}))
 
-	hexForumHandler := api.NewStrictHandlerWithOptions(handlers, nil, api.StrictHTTPServerOptions{
-		RequestErrorHandlerFunc:  api2.HandleResponseError,
-		ResponseErrorHandlerFunc: api2.HandleResponseError,
-	})
-	api.HandlerFromMux(hexForumHandler, r)
+	handler := api.NewStrictHandlerWithOptions(handlers, nil, api.StrictHTTPServerOptions{})
+	api.HandlerFromMux(handler, r)
 
 	server := &http.Server{
 		Handler:      r,

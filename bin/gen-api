@@ -1,4 +1,7 @@
 #!/bin/sh
 
+redocly bundle cmd/api/schema/openapi.yaml -o cmd/api/schema/bundled.yaml
+
 go run github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen \
-  --config=cmd/api/oapi.yaml cmd/api/openapi.yaml
+  --config=cmd/api/oapi-codegen.yaml \
+  cmd/api/schema/bundled.yaml

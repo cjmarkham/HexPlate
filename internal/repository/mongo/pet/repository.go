@@ -1,4 +1,4 @@
-package forum
+package pet
 
 import (
 	"go.mongodb.org/mongo-driver/mongo"
@@ -15,5 +15,5 @@ func ProvideRepository(collection *mongo.Collection) Repository {
 }
 
 func ProvideCollection(db *mongo.Database) *mongo.Collection {
-	return db.Collection("forums")
+	return db.Collection("pets")
 }

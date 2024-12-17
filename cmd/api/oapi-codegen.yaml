@@ -4,4 +4,4 @@ generate:
   models: true
   embedded-spec: true
   strict-server: true
-output: cmd/api/gen.go
+output: cmd/api/generated.go

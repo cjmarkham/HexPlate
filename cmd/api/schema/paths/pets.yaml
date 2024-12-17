@@ -1,0 +1,32 @@
+post:
+  tags:
+    - pet
+  summary: Create a new pet to the store
+  description: Create a new pet to the store
+  operationId: createPet
+  responses:
+    '201':
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            additionalProperties: false
+            required:
+              - data
+            properties:
+              data:
+                $ref: ../components/schemas/PetResponse.yaml
+    '405':
+      description: Invalid input
+  requestBody:
+    description: Create a new pet in the store
+    required: true
+    content:
+      application/json:
+        schema:
+          additionalProperties: false
+          required:
+            - data
+          properties:
+            data:
+              $ref: ../components/schemas/CreatePet.yaml

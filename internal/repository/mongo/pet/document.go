@@ -1,7 +1,7 @@
-package forum
+package pet
 
 import (
-	"github.com/cjmarkham/hexplate/internal/domain/forum"
+	"github.com/cjmarkham/hexplate/internal/domain/pet"
 	"github.com/google/uuid"
 )
 
@@ -10,9 +10,9 @@ type Document struct {
 	Name string `bson:"name"`
 }
 
-func NewDocument(forum forum.Forum) Document {
+func NewDocument(p pet.Pet) Document {
 	return Document{
 		ID:   uuid.New().String(),
-		Name: forum.Name,
+		Name: p.Name,
 	}
 }

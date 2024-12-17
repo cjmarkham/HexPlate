@@ -4,10 +4,10 @@
 package main
 
 import (
-	forumApi "github.com/cjmarkham/hexplate/internal/api/forum"
-	forumService "github.com/cjmarkham/hexplate/internal/domain/forum"
+	forumApi "github.com/cjmarkham/hexplate/internal/api/pet"
+	forumService "github.com/cjmarkham/hexplate/internal/domain/pet"
 	"github.com/cjmarkham/hexplate/internal/repository/mongo"
-	forumMongo "github.com/cjmarkham/hexplate/internal/repository/mongo/forum"
+	forumMongo "github.com/cjmarkham/hexplate/internal/repository/mongo/pet"
 	"github.com/google/wire"
 )
 

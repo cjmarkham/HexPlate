@@ -1,0 +1,21 @@
+required:
+  - id
+  - type
+  - attributes
+properties:
+  id:
+    type: string
+    x-go-type: googleuuid.UUID
+    x-go-type-import:
+      path: github.com/google/uuid
+      name: googleuuid
+    example: 8d186a5c-219e-4072-af8c-c659871c75a0
+  type:
+    type: string
+    enum:
+      - pet
+    default: pet
+  attributes:
+    $ref: ./PetResponseAttributes.yaml
+type: object
+additionalProperties: false

@@ -1,0 +1,95 @@
+get:
+  tags:
+    - pet
+  summary: Find pet by ID
+  description: Returns a single pet
+  operationId: getPetById
+  parameters:
+    - name: petId
+      in: path
+      description: ID of pet to return
+      required: true
+      schema:
+        type: string
+        x-go-type: googleuuid.UUID
+        x-go-type-import:
+          path: github.com/google/uuid
+          name: googleuuid
+  responses:
+    '200':
+      description: successful operation
+      content:
+        application/json:
+          schema:
+            additionalProperties: false
+            properties:
+              data:
+                $ref: ../components/schemas/PetResponse.yaml
+    '400':
+      description: Invalid ID supplied
+    '404':
+      description: Pet not found
+put:
+  tags:
+    - pet
+  summary: Update an existing pet
+  description: Update an existing pet by Id
+  operationId: updatePet
+  parameters:
+    - name: petId
+      in: path
+      description: ID of pet to return
+      required: true
+      schema:
+        type: string
+        x-go-type: googleuuid.UUID
+        x-go-type-import:
+          path: github.com/google/uuid
+          name: googleuuid
+  responses:
+    '200':
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PetResponse.yaml
+    '400':
+      description: Invalid ID supplied
+    '404':
+      description: Pet not found
+    '405':
+      description: Validation exception
+  requestBody:
+    description: Update an existent pet in the store
+    required: true
+    content:
+      application/json:
+        schema:
+          additionalProperties: false
+          required:
+            - data
+          properties:
+            data:
+              $ref: ../components/schemas/UpdatePet.yaml
+delete:
+  tags:
+    - pet
+  summary: Deletes a pet
+  description: ''
+  operationId: deletePet
+  parameters:
+    - name: petId
+      in: path
+      description: ID of pet to return
+      required: true
+      schema:
+        type: string
+        x-go-type: googleuuid.UUID
+        x-go-type-import:
+          path: github.com/google/uuid
+          name: googleuuid
+  responses:
+    '400':
+      description: Invalid pet value
+    '204':
+      description: No content

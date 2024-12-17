@@ -7,27 +7,27 @@
 package main
 
 import (
-	"github.com/cjmarkham/hexplate/internal/api/forum"
-	forum3 "github.com/cjmarkham/hexplate/internal/domain/forum"
+	"github.com/cjmarkham/hexplate/internal/api/pet"
+	forum3 "github.com/cjmarkham/hexplate/internal/domain/pet"
 	"github.com/cjmarkham/hexplate/internal/repository/mongo"
-	forum2 "github.com/cjmarkham/hexplate/internal/repository/mongo/forum"
+	forum2 "github.com/cjmarkham/hexplate/internal/repository/mongo/pet"
 	"github.com/google/wire"
 )
 
 // Injectors from inject_main.go:
 
-func injectApp() forum.Handlers {
+func injectApp() pet.Handlers {
 	database := mongo.ProvideDatabase()
 	collection := forum2.ProvideCollection(database)
 	repository := forum2.ProvideRepository(collection)
 	service := forum3.ProvideService(repository)
-	handlers := forum.ProvideHandlers(service)
+	handlers := pet.ProvideHandlers(service)
 	return handlers
 }
 
 // inject_main.go:
 
-var apiHandlers = wire.NewSet(forum.ProvideHandlers)
+var apiHandlers = wire.NewSet(pet.ProvideHandlers)
 
 var domainHandlers = wire.NewSet(forum3.ProvideService)
 

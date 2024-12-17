@@ -1,8 +1,8 @@
-package forum
+package pet
 
 import "github.com/google/uuid"
 
-type Forum struct {
+type Pet struct {
 	ID   uuid.UUID
 	Name string
 }
@@ -11,8 +11,8 @@ type DTO struct {
 	Name string
 }
 
-func (d DTO) ToForum() Forum {
-	return Forum{
+func (d DTO) ToPet() Pet {
+	return Pet{
 		Name: d.Name,
 	}
 }

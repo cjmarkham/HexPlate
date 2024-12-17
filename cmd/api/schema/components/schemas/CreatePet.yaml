@@ -1,0 +1,13 @@
+required:
+  - type
+  - attributes
+properties:
+  type:
+    type: string
+    enum:
+      - pet
+    default: pet
+  attributes:
+    $ref: ./PetCreateAttributes.yaml
+type: object
+additionalProperties: false

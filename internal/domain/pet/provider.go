@@ -1,4 +1,4 @@
-package forum
+package pet
 
 type service struct {
 	repository Repository
