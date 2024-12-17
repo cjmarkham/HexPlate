@@ -8,9 +8,10 @@ package main
 
 import (
 	"github.com/cjmarkham/hexplate/internal/api/pet"
-	forum3 "github.com/cjmarkham/hexplate/internal/domain/pet"
+	pet3 "github.com/cjmarkham/hexplate/internal/domain/pet"
+	"github.com/cjmarkham/hexplate/internal/repository"
 	"github.com/cjmarkham/hexplate/internal/repository/mongo"
-	forum2 "github.com/cjmarkham/hexplate/internal/repository/mongo/pet"
+	pet2 "github.com/cjmarkham/hexplate/internal/repository/mongo/pet"
 	"github.com/google/wire"
 )
 
@@ -18,9 +19,10 @@ import (
 
 func injectApp() pet.Handlers {
 	database := mongo.ProvideDatabase()
-	collection := forum2.ProvideCollection(database)
-	repository := forum2.ProvideRepository(collection)
-	service := forum3.ProvideService(repository)
+	collection := pet2.ProvideCollection(database)
+	operations := mongo.ProvideOperations(collection)
+	repository := pet2.ProvideRepository(collection, operations)
+	service := pet3.ProvideService(repository)
 	handlers := pet.ProvideHandlers(service)
 	return handlers
 }
@@ -29,6 +31,6 @@ func injectApp() pet.Handlers {
 
 var apiHandlers = wire.NewSet(pet.ProvideHandlers)
 
-var domainHandlers = wire.NewSet(forum3.ProvideService)
+var domainHandlers = wire.NewSet(pet3.ProvideService)
 
-var repositoryHandlers = wire.NewSet(mongo.ProvideDatabase, forum2.ProvideRepository, forum2.ProvideCollection, wire.Bind(new(forum3.Repository), new(forum2.Repository)))
+var repositoryHandlers = wire.NewSet(mongo.ProvideDatabase, pet2.ProvideCollection, mongo.ProvideOperations, wire.Bind(new(repository.Operations), new(mongo.Operations)), pet2.ProvideRepository, wire.Bind(new(pet3.Repository), new(pet2.Repository)))

@@ -4,29 +4,32 @@
 package main
 
 import (
-	forumApi "github.com/cjmarkham/hexplate/internal/api/pet"
-	forumService "github.com/cjmarkham/hexplate/internal/domain/pet"
+	petApi "github.com/cjmarkham/hexplate/internal/api/pet"
+	petService "github.com/cjmarkham/hexplate/internal/domain/pet"
+	"github.com/cjmarkham/hexplate/internal/repository"
 	"github.com/cjmarkham/hexplate/internal/repository/mongo"
-	forumMongo "github.com/cjmarkham/hexplate/internal/repository/mongo/pet"
+	"github.com/cjmarkham/hexplate/internal/repository/mongo/pet"
 	"github.com/google/wire"
 )
 
 var apiHandlers = wire.NewSet(
-	forumApi.ProvideHandlers,
+	petApi.ProvideHandlers,
 )
 
 var domainHandlers = wire.NewSet(
-	forumService.ProvideService,
+	petService.ProvideService,
 )
 
 var repositoryHandlers = wire.NewSet(
 	mongo.ProvideDatabase,
-	forumMongo.ProvideRepository,
-	forumMongo.ProvideCollection,
-	wire.Bind(new(forumService.Repository), new(forumMongo.Repository)),
+	pet.ProvideCollection,
+	mongo.ProvideOperations,
+	wire.Bind(new(repository.Operations), new(mongo.Operations)),
+	pet.ProvideRepository,
+	wire.Bind(new(petService.Repository), new(pet.Repository)),
 )
 
-func injectApp() forumApi.Handlers {
+func injectApp() petApi.Handlers {
 	panic(
 		wire.Build(
 			apiHandlers,

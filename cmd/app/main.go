@@ -32,7 +32,9 @@ func start(handlers pet.Handlers) {
 		ErrorHandler: api2.HandleValidationError,
 	}))
 
-	handler := api.NewStrictHandlerWithOptions(handlers, nil, api.StrictHTTPServerOptions{})
+	handler := api.NewStrictHandlerWithOptions(handlers, nil, api.StrictHTTPServerOptions{
+		ResponseErrorHandlerFunc: api2.HandleResponseError,
+	})
 	api.HandlerFromMux(handler, r)
 
 	server := &http.Server{

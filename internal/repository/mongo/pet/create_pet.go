@@ -8,7 +8,7 @@ import (
 
 func (r Repository) Create(ctx context.Context, p pet.Pet) (*pet.Pet, error) {
 	doc := NewDocument(p)
-	_, err := r.collection.InsertOne(ctx, doc)
+	_, err := r.operations.InsertOne(ctx, doc)
 	if err != nil {
 		return nil, err
 	}
