@@ -1,4 +1,4 @@
-package __testutils
+package testdata
 
 type MockParameters struct {
 	Response interface{}

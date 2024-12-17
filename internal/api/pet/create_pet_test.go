@@ -3,8 +3,8 @@ package pet
 import (
 	"context"
 	"github.com/cjmarkham/hexplate/cmd/api"
-	"github.com/cjmarkham/hexplate/internal/domain/__testutils"
 	"github.com/cjmarkham/hexplate/internal/domain/pet"
+	"github.com/cjmarkham/hexplate/internal/testdata"
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/mock/gomock"
@@ -13,7 +13,7 @@ import (
 
 func TestHandlers_CreateForum(t *testing.T) {
 	tests := map[string]struct {
-		mockCreate       __testutils.MockParameters
+		mockCreate       testdata.MockParameters
 		request          api.CreatePetRequestObject
 		expectedError    error
 		expectedResponse api.CreatePet201JSONResponse
@@ -28,7 +28,7 @@ func TestHandlers_CreateForum(t *testing.T) {
 					},
 				},
 			},
-			mockCreate: __testutils.MockParameters{
+			mockCreate: testdata.MockParameters{
 				Response: &pet.Pet{
 					Name: "Test Pet",
 				},
